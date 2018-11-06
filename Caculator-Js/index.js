@@ -1,72 +1,89 @@
 var screen = '0';
-var input1 = 0;
-var input2 = null;
-var operator ='';
-
+var operator = '';
+var num1 = 0;
+var num2 = '';
+var isDecimal = false;
 function initialize(){
 	updateScreen();
 }
 function number(num) {
-	if(operator) {
-		input2 = input2 * 10 + num;
-	} else {
-		input1 = input1 * 10 + num;
+	if(num === '.') {
+		if(isDecimal) return;
+		isDecimal = true;
 	}
-	if(screen === '0') screen = num;
-	else screen += num;
+	screen = (screen === '0' && num!== '.') ? num : screen.toString().concat(num);
+	if(operator) num2 = num2.toString().concat(num);
 	updateScreen();
 }
 function operation(oper) {
-	if(operator && input2!==null) calculate();
-	operator = oper; 
-	updateScreen();			
+	if(!operator) {
+		num1 = Number(screen);
+		isDecimal = false;
+		num2 = '0';
+		operator = oper;
+		screen += operator;
+		updateScreen();
+	} else {
+		if(!num2) {
+			operator = oper;
+			screen = screen.slice(0, screen.length-1);
+			screen += operator;
+			updateScreen();
+		} else calculate();
+	}
 }
 function calculate() {
+	if(!num2) {
+		return;
+	}
+	try{
+		num2 = Number(num2);
+	} catch(err) {
+		console.error(err);
+	}
 	addLog();
 	switch(operator) {
 		case '+':
-			input1=input1+input2;
+			num1=num1+num2;
 			break;
 		case '-':
-			input1=input1-input2;
+			num1=num1-num2;
 			break;
 		case 'x':
-			input1=input1*input2;
+			num1=num1*num2;
 			break;
 		case ':':
-			if(input2===0) 
+			if(num2===0) 
 				{
 					alert('Error: Divide by zero');
 					clearScreen();
 				}
 			else {
-				input1=input1/input2;
+				num1=num1/num2;
 			}
 			break;
 		default: 
 			break;
 	}
-	input2 = null;
+	num2 = '';
 	operator = '';
-	updateScreen();
-}
-function clearScreen() {
-	input1 = 0;
-	operator = '';
-	input2 = null;
-	updateScreen();
-}
-function updateScreen() {
-	screen = input1.toString().concat(operator);
-	if(operator && input2!==null) {
-		screen = screen.concat(input2);
-	}
-	document.getElementById('screen').innerHTML = screen;
+	screen = num1;
+	updateScreen();	
 }
 function addLog() {
-	var newLog = input1.toString().concat(operator, input2);
+	var newLog = num1.toString().concat(operator, num2);
 	var listItem = document.createElement('li');
 	var node = document.createTextNode(newLog);
 	listItem.appendChild(node);
 	document.getElementById('loglist').appendChild(listItem);
+}
+function clearScreen() {
+	screen = '0';
+	operator = '';
+	num1 = 0;
+	num2 = 0;
+	updateScreen();
+}
+function updateScreen() {
+	document.getElementById('screen').innerHTML = screen;
 }
