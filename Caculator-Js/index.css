@@ -1,0 +1,30 @@
+html {
+	font-size: 1em;
+	box-sizing: border-box;
+}
+.btn {
+	height: 50px;
+	width: 50px;
+	font-size: 1.5em;
+}
+#calculator {
+	padding: 2px;
+	background-color: #888;
+	display: inline-table;
+}
+#log {
+	position: absolute;
+	top: 0px;
+	display: inline-block;
+	height: 100%;
+	width: 150px;
+}
+#screen {
+	box-sizing: border-box;background-color: #fff;
+	width: 155px;
+	height: 50px;
+	padding: 5px;
+	line-height: 40px;
+	margin: 0px;
+	text-align: right;
+}
