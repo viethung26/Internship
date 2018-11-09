@@ -11,26 +11,32 @@ function number(num) {
 		if(isDecimal) return;
 		isDecimal = true;
 	}
-	screen = (screen === '0' && num!== '.') ? num : screen.toString().concat(num);
+	screen = (screen == '0' && num!== '.') ? num : screen.toString().concat(num);
 	if(operator) num2 = num2.toString().concat(num);
 	updateScreen();
 }
 function operation(oper) {
 	if(!operator) {
-		num1 = Number(screen);
+		try {
+			num1 = Number(screen);
+		} catch(err) {
+			console.error(err);
+		}
 		isDecimal = false;
-		num2 = '0';
 		operator = oper;
 		screen += operator;
-		updateScreen();
 	} else {
 		if(!num2) {
 			operator = oper;
 			screen = screen.slice(0, screen.length-1);
 			screen += operator;
-			updateScreen();
-		} else calculate();
+		} else {
+			calculate();
+			operator = oper;
+			screen += oper;
+		}
 	}
+	updateScreen()
 }
 function calculate() {
 	if(!num2) {
@@ -67,7 +73,7 @@ function calculate() {
 	}
 	num2 = '';
 	operator = '';
-	screen = num1;
+	screen = num1.toString();
 	updateScreen();	
 }
 function addLog() {
@@ -82,6 +88,7 @@ function clearScreen() {
 	operator = '';
 	num1 = 0;
 	num2 = 0;
+	isDecimal = false;
 	updateScreen();
 }
 function updateScreen() {

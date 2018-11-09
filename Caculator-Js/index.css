@@ -27,4 +27,5 @@ html {
 	line-height: 40px;
 	margin: 0px;
 	text-align: right;
+	overflow: hidden;
 }
