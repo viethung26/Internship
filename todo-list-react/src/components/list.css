@@ -1,0 +1,16 @@
+.list {
+	border-radius: 5px;
+	background-color: #D5D5D5;
+	margin: 6px;
+	padding: 8px;
+	width: 18vw;
+}
+.listhead {
+	margin: 4px 8px;
+}
+.card {
+	background-color: white;
+	border-radius: 2px;
+	margin: 4px;
+	padding: 8px; 
+}
