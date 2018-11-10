@@ -15,9 +15,10 @@ html {
 #log {
 	position: absolute;
 	top: 0px;
+	margin-left: 5px;
 	display: inline-block;
 	height: 100%;
-	width: 150px;
+	width: 180px;
 }
 #screen {
 	box-sizing: border-box;background-color: #fff;
@@ -28,4 +29,7 @@ html {
 	margin: 0px;
 	text-align: right;
 	overflow: hidden;
+}
+ul {
+	list-style-type: square;
 }

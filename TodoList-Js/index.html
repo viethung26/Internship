@@ -5,107 +5,20 @@
 	<title>Todo List in JS </title>
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-	<style>
-		*{
-			margin: 0px;
-			font-family: 'Roboto', sans-serif;
-		}
-		body {
-			box-sizing: border-box;
-			float: left;
-			overflow: hidden;
-
-		}
-		h3 {
-			color: grey;
-			font-style: italic;
-		}
-		.header {
-			padding: 8px 16px;
-			background-color: #FFDE03;
-			width: 100vw;
-			box-shadow: 0px 0px 2px grey;
-		}
-		.container {
-			display: flex;
-			margin: 0px 8px;
-			flex-wrap: wrap;
-		}
-		.list {
-			border-radius: 5px;
-			background-color: #D5D5D5;
-			margin: 6px;
-			padding: 8px;
-			width: 18vw;
-		}
-		.listhead {
-			margin: 4px 8px;
-		}
-		.card {
-			background-color: white;
-			border-radius: 2px;
-			margin: 4px;
-			padding: 8px;
-		}
-	</style>
+	<link rel="stylesheet" href="./index.css"/>
 </head>
 <body>
 	<div class="header">
 		<h3><icon class="far fa-calendar-check"></icon> To-Do list</h3>
+		<button class="btnadd btn" onclick="showModal()"><icon class="fa fa-plus-square"></icon></button>
 	</div>
 	<div class="container">
-		<div id="l1" class="list">
-			<div class="listhead">
-				<h4>Doing</h4>
-			</div>
-			<div class="listcard" ondragover="allowDrop(event)" ondrop="drop(event)">
-				<div class="card" id="1" draggable="true" ondragstart="dragstart(event)"> ello</div>
-				<div class="card" id="3" draggable="true" ondragstart="dragstart(event)"> ao ae ae </div>
-			</div>
-			<div class="addcard">
-				+ Add card
+		<div class="modal" id="modal1">
+			<div class="addlist">
+				<input type="text" id="listname" autofocus="true" placeholder="Type new list title ..." />
+				<button class="btn" onclick="createNew()">OK</button>
 			</div>
 		</div>
-		<div id="l2" class="list" ondragover="allowDrop(event)" ondrop="drop(event)">
-			<div class="listhead">
-				<h4>Doing</h4>
-			</div>
-			<div class="listcard" ondragover="allowDrop(event)" ondrop="drop(event)">
-				<div class="card" id="2" draggable="true" ondragstart="dragstart(event)">Bye</div>
-			</div>
-			<div class="addcard">
-				+ Add card
-			</div>
-		</div>
-
-	</div>
-	<script>
-		var x = document.querySelectorAll(".addcard");
-		// console.log(x[0].id);
-
-		function dragstart(event) {
-			event.dataTransfer.setData("move", event.target.id);
-		}
-
-		function allowDrop(event) {
-			event.preventDefault();
-		}
-		
-		function drop(event) {
-			event.preventDefault();
-
-			const data = event.dataTransfer.getData("move");
-			console.log(data);
-			document.getElementById(event.target.id).appendChild(document.getElementById(data));
-		}
-		// function drop(event) {
-		// 	event.preventDefault();
-		// 	var data = event.dataTransfer.getData("textx");
-		// 	if(event.target.id === data) return;
-		// 	let prevPar = document.getElementById(data).parentNode;
-		// 	if(prevPar.id!==event.target.id) 
-		// 		document.getElementById(event.target.id).appendChild(document.getElementById(data));
-		// }
-	</script>
+	<script type="text/javascript" src="index.js"></script>
 </body>
 </html>

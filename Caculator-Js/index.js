@@ -47,16 +47,19 @@ function calculate() {
 	} catch(err) {
 		console.error(err);
 	}
-	addLog();
+	let newLog = num1.toString().concat(' ',operator,' ',num2,' = ');
 	switch(operator) {
 		case '+':
 			num1=num1+num2;
+			addLog(newLog.concat(num1));
 			break;
 		case '-':
 			num1=num1-num2;
+			addLog(newLog.concat(num1));
 			break;
 		case 'x':
 			num1=num1*num2;
+			addLog(newLog.concat(num1));
 			break;
 		case ':':
 			if(num2===0) 
@@ -66,6 +69,7 @@ function calculate() {
 				}
 			else {
 				num1=num1/num2;
+				addLog(newLog.concat(num1));
 			}
 			break;
 		default: 
@@ -76,8 +80,7 @@ function calculate() {
 	screen = num1.toString();
 	updateScreen();	
 }
-function addLog() {
-	var newLog = num1.toString().concat(operator, num2);
+function addLog(newLog) {
 	var listItem = document.createElement('li');
 	var node = document.createTextNode(newLog);
 	listItem.appendChild(node);
