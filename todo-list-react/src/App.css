@@ -1,0 +1,12 @@
+.btn {
+	font-size: 1.2em;
+	border: none;
+	background-color: inherit;
+	text-decoration: none;
+	background-color: none;
+	color: grey;
+	cursor: pointer;
+}
+.btn:hover {
+	color: white;
+}

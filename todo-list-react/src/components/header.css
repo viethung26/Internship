@@ -1,0 +1,18 @@
+.header {
+	padding: 8px 16px;
+	background-color: #FFDE03;
+	width: 100vw;
+	box-shadow: 0px 0px 2px grey;
+}
+
+.header h3 {
+	color: grey;
+	font-style: italic;
+	display: inline-block;
+}
+
+.btnadd {
+	position: absolute;
+	right: 10px;
+}
+
