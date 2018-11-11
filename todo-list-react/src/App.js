@@ -33,7 +33,7 @@ class App extends Component {
         const {lists} = this.state;
         const rows = [];
         for(let list of lists) {
-            rows.push(<List key={list.id} list = {list} newCard={this.newCard} handleMove={this.handleMove}/>)
+            rows.push(<List key={list.id} list={list} removeList={this.handleRemoveList}  newCard={this.newCard} handleMove={this.handleMove} removeCard={this.handleRemoveCard}/>)
         }
         return rows;
     }
@@ -45,6 +45,12 @@ class App extends Component {
         lists.push(newList);
         code++;
         this.setState({lists,code});
+    }
+    handleRemoveList = (id) => {
+        let {lists} = this.state;
+        let index = lists.findIndex((val)=>{return id === val.id});
+        lists.splice(index,1);
+        this.setState({lists});
     }
     newCard = (id, title) => {
         let {lists, cardcode} = this.state;
@@ -65,6 +71,13 @@ class App extends Component {
         card.listid = lists[lAIndex].id;
         lists[lAIndex].cards.push(card);
         lists[lBIndex].cards.splice(cardIndex,1);
+        this.setState({lists});
+    }
+    handleRemoveCard = (card) => {
+        let {lists} = this.state;
+        let index = lists.findIndex((val)=>{return card.listid === val.id});
+        let cardIndex = lists[index].cards.findIndex((val)=>{return card.id === val.id});
+        lists[index].cards.splice(cardIndex,1);
         this.setState({lists});
     }
 }

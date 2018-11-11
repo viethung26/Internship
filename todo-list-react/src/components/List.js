@@ -7,7 +7,9 @@ class List extends Component {
 	}
 	render() {
 		return (<div className="list">
-			<div className='listhead'><h4>{this.props.list.name}</h4></div>
+			<div className='listhead'>
+				<h4>{this.props.list.name} <button className="remove" onClick={()=>this.props.removeList(this.props.list.id)}><i className="fa fa-window-close"></i></button></h4>
+			</div>
 			<div className="listcard" onDragOver={(event)=>event.preventDefault()} 
 			onDrop={(event)=>this.handleDrop(event)}>
 				{this.loadCard()}
@@ -32,7 +34,7 @@ class List extends Component {
 					event.dataTransfer.setData('cardid', event.target.id);
 					event.dataTransfer.setData('listid', card.listid);
 				}
-			}>{card.title}</div>)
+			}>{card.title} <button className="remove" onClick={()=>this.props.removeCard(card)}><i className="fa fa-trash-o"></i></button></div>)
 		}
 		return rows;
 	}
