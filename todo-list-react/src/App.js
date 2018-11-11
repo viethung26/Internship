@@ -7,8 +7,8 @@ import './App.css';
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {lists: [{id: 0, name: 'Done', cards: [{id: 0, title: "Xem phim"}, {id: 1, title: "Choi game"}]},
-        {id: 1, name: 'Doing', cards: [{id: 2, title: "Hoc bai"}, {id: 3, title: "Coding"}]},
+        this.state = {lists: [{id: 0, name: 'Done', cards: [{listid: 0, id: 0, title: "Xem phim"}, {listid: 0, id: 1, title: "Choi game"}]},
+        {id: 1, name: 'Doing', cards: [{listid: 1, id: 2, title: "Hoc bai"}, {listid: 1, id: 3, title: "Coding"}]},
         {id: 2, name: 'Checking', cards: []} ],
         isModalEnable: false,
         code: 3,
@@ -33,7 +33,7 @@ class App extends Component {
         const {lists} = this.state;
         const rows = [];
         for(let list of lists) {
-            rows.push(<List key={list.id} list = {list} newCard={this.newCard}/>)
+            rows.push(<List key={list.id} list = {list} newCard={this.newCard} handleMove={this.handleMove}/>)
         }
         return rows;
     }
@@ -51,9 +51,21 @@ class App extends Component {
         let index = lists.findIndex((val)=> {
             return val.id === id;
         });
-        lists[index].cards.push({id: cardcode, title: title});
+        lists[index].cards.push({listid: lists[index].id, id: cardcode, title: title});
         cardcode++;
         this.setState({lists, cardcode});
+    }
+    handleMove = (cardid, listbefore, listafter) => {
+        // find index listbefore
+        let {lists} = this.state;
+        let lBIndex = lists.findIndex((val) => { return val.id == listbefore});
+        let lAIndex = lists.findIndex((val) => { return val.id == listafter});
+        let cardIndex = lists[lBIndex].cards.findIndex((val)=> {return val.id == cardid});
+        let card = lists[lBIndex].cards[cardIndex];
+        card.listid = lists[lAIndex].id;
+        lists[lAIndex].cards.push(card);
+        lists[lBIndex].cards.splice(cardIndex,1);
+        this.setState({lists});
     }
 }
 

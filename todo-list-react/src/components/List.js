@@ -8,7 +8,8 @@ class List extends Component {
 	render() {
 		return (<div className="list">
 			<div className='listhead'><h4>{this.props.list.name}</h4></div>
-			<div className="listcard">
+			<div className="listcard" onDragOver={(event)=>event.preventDefault()} 
+			onDrop={(event)=>this.handleDrop(event)}>
 				{this.loadCard()}
 			</div>
 			<div className="typearea">
@@ -26,13 +27,22 @@ class List extends Component {
 		const cards = this.props.list.cards;
 		const rows = [];
 		for(let card of cards) {
-			rows.push(<div key={card.id} className="card" id={card.id} draggable={true}>{card.title}</div>)
+			rows.push(<div key={card.id} className="card" id={card.id} draggable={true} 
+				onDragStart={(event)=>{
+					event.dataTransfer.setData('cardid', event.target.id);
+					event.dataTransfer.setData('listid', card.listid);
+				}
+			}>{card.title}</div>)
 		}
 		return rows;
 	}
 	handleNewCard = () => {
 		this.setState({isEnable: false});
 		this.props.newCard(this.props.list.id, this.state.text.trim());
+	}
+	handleDrop = (event) => {
+		event.preventDefault();
+		this.props.handleMove(event.dataTransfer.getData('cardid'), event.dataTransfer.getData('listid'), this.props.list.id);
 	}
 }
 

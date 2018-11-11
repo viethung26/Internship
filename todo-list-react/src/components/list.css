@@ -14,3 +14,7 @@
 	margin: 4px;
 	padding: 8px; 
 }
+.listcard {
+	padding-bottom: 20px;
+	min-height: 25px;
+}
