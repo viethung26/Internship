@@ -1,2 +1,2 @@
 # Demo 
-![Demo](/images/demo.png)
+![Demo](/images/demo.PNG)
