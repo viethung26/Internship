@@ -7,20 +7,24 @@ html {
 	width: 50px;
 	font-size: 1.5em;
 }
-#calculator {
+.app {
+	position: relative;
+}
+.calculator {
 	padding: 2px;
 	background-color: #888;
-	display: inline-table;
+	display: inline-block;
 }
-#log {
+.log {
 	position: absolute;
 	top: 0px;
 	margin-left: 5px;
 	display: inline-block;
-	height: 100%;
 	width: 180px;
+	height: 100%;
+	overflow-y: auto;
 }
-#screen {
+.screen {
 	box-sizing: border-box;background-color: #fff;
 	width: 155px;
 	height: 50px;

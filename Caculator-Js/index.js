@@ -1,99 +1,158 @@
-var screen = '0';
-var operator = '';
-var num1 = 0;
-var num2 = '';
-var isDecimal = false;
-function initialize(){
-	updateScreen();
-}
-function number(num) {
-	if(num === '.') {
-		if(isDecimal) return;
-		isDecimal = true;
+class Calculator {
+	constructor(id) {
+		this.el = document.getElementById(id);
+		this.el.innerHTML = this.constructor.template;
+		this.screen = this.el.querySelector('.screen');
+		this.log = this.el.querySelector('.loglist');
+		this.el.addEventListener('click', this.handleClick.bind(this))
+
+		this.input = '0';
+		this.operator = '';
+		this.num1 = 0;
+		this.num2 = '';
+		this.isDecimal = false;
+
+		this.updateScreen();
 	}
-	screen = (screen == '0' && num!== '.') ? num : screen.toString().concat(num);
-	if(operator) num2 = num2.toString().concat(num);
-	updateScreen();
-}
-function operation(oper) {
-	if(!operator) {
-		try {
-			num1 = Number(screen);
-		} catch(err) {
-			console.error(err);
-		}
-		isDecimal = false;
-		operator = oper;
-		screen += operator;
-	} else {
-		if(!num2) {
-			operator = oper;
-			screen = screen.slice(0, screen.length-1);
-			screen += operator;
-		} else {
-			calculate();
-			operator = oper;
-			screen += oper;
-		}
-	}
-	updateScreen()
-}
-function calculate() {
-	if(!num2) {
-		return;
-	}
-	try{
-		num2 = Number(num2);
-	} catch(err) {
-		console.error(err);
-	}
-	let newLog = num1.toString().concat(' ',operator,' ',num2,' = ');
-	switch(operator) {
-		case '+':
-			num1=num1+num2;
-			addLog(newLog.concat(num1));
-			break;
-		case '-':
-			num1=num1-num2;
-			addLog(newLog.concat(num1));
-			break;
-		case 'x':
-			num1=num1*num2;
-			addLog(newLog.concat(num1));
-			break;
-		case ':':
-			if(num2===0) 
-				{
-					alert('Error: Divide by zero');
-					clearScreen();
+	handleClick(e) {
+		if (e.target.matches('button')) {
+			const val = e.target.innerText
+			if (val.match(/[0-9]/)) {
+				this.addNumber(val)
+			} else if(val === '.') {
+				if(this.isDecimal) return;
+				this.isDecimal = true;
+				this.addNumber(val);	
+			} else if(val.match(/[+|\-|x|:]/)) {
+				if(!this.operator) {
+					this.num1 = Number(this.input);
+					this.isDecimal = false;
+					this.operator = val;
+				} else {
+					if(!this.num2) {
+						this.operator = val;
+						this.input = this.input.slice(0, this.input.length-1);
+					} else {
+						this.calculate();
+						this.operator = val;
+					}
 				}
-			else {
-				num1=num1/num2;
-				addLog(newLog.concat(num1));
+				this.input += this.operator;
+				this.updateScreen();
+				
+			} else if(val === '=') {
+				this.calculate();
+			} else if(val === 'C') {
+				this.clearScreen();
 			}
-			break;
-		default: 
-			break;
+
+		console.log('clicked', this.el.id,  e.target.innerText)
+		}
+		
 	}
-	num2 = '';
-	operator = '';
-	screen = num1.toString();
-	updateScreen();	
+	addNumber(number) {
+		if(this.operator) this.num2 = (this.num2 == '0' && number!== '.') ? number : this.num2.toString().concat(number);
+		this.input = (this.input == '0' && number!== '.') ? number : this.input.toString().concat(number);
+
+		this.updateScreen();
+	}
+	calculate() {
+		if(!this.num2) {
+			return;
+		}
+		this.num2 = Number(this.num2);
+		let newLog = this.num1.toString().concat(' ',this.operator,' ',this.num2,' = ');
+		switch(this.operator) {
+			case '+':
+				this.num1=this.num1+this.num2;
+				this.addLog(newLog.concat(this.num1));
+				break;
+			case '-':
+				this.num1=this.num1-this.num2;
+				this.addLog(newLog.concat(this.num1));
+				break;
+			case 'x':
+				this.num1=this.num1*this.num2;
+				this.addLog(newLog.concat(this.num1));
+				break;
+			case ':':
+				if(this.num2===0) 
+					{
+						alert('Error: Divide by zero');
+						this.clearScreen();
+					}
+				else {
+					this.num1=this.num1/this.num2;
+					this.addLog(newLog.concat(this.num1));
+				}
+				break;
+			default: 
+				break;
+		}
+		this.num2 = '';
+		this.operator = '';
+		this.input = this.num1.toString();
+		this.updateScreen();
+	}
+	addLog(newLog) {
+		var listItem = document.createElement('li');
+		var node = document.createTextNode(newLog);
+		listItem.appendChild(node);
+		this.log.appendChild(listItem);
+	}
+	updateScreen() {
+		this.screen.innerHTML = this.input;
+	}
+	clearScreen() {
+		this.num2 = '';
+		this.operator = '';
+		this.input = '0';
+		this.updateScreen();
+	}
 }
-function addLog(newLog) {
-	var listItem = document.createElement('li');
-	var node = document.createTextNode(newLog);
-	listItem.appendChild(node);
-	document.getElementById('loglist').appendChild(listItem);
-}
-function clearScreen() {
-	screen = '0';
-	operator = '';
-	num1 = 0;
-	num2 = 0;
-	isDecimal = false;
-	updateScreen();
-}
-function updateScreen() {
-	document.getElementById('screen').innerHTML = screen;
-}
+Calculator.template = `
+	<div class="app">
+		<div class="calculator">
+			<table>
+				<tr>
+					<td><button class="btn">=</button></td>
+					<td colspan="3"><div class="screen"></div></td>
+				</tr>
+				<tr>
+					<td><button class="btn">1</button></td>
+					<td><button class="btn">2</button></td>
+					<td><button class="btn">3</button></td>
+					<td><button class="btn">+</button></td>
+				</tr>
+				<tr>
+					<td><button class="btn" >4</button></td>
+					<td><button class="btn">5</button></td>
+					<td><button class="btn">6</button></td>
+					<td><button class="btn">-</button></td>
+				</tr>
+				<tr>
+					<td><button class="btn">7</button></td>
+					<td><button class="btn">8</button></td>
+					<td><button class="btn">9</button></td>
+					<td><button class="btn">x</button></td>
+				</tr>
+				<tr>
+					<td><button class="btn">0</button></td>
+					<td><button class="btn">.</button></td>
+					<td><button class="btn">C</button></td>
+					<td><button class="btn">:</button></td>
+				</tr>
+			</table>
+		</div>
+		<div class="log">
+			<h5 style="text-align: center">Log</h5>
+			<hr>
+			<ul class='loglist'>
+			</ul>
+		</div>
+	</div>
+	
+`;
+new Calculator('calc1');
+new Calculator('calc2');
+new Calculator('calc3');
