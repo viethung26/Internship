@@ -8,6 +8,15 @@ body {
 	overflow: hidden;
 
 }
+.flex {
+	width: 100%;
+	/*background-color: red;*/
+	display: flex;
+}
+.center {
+	justify-content: center;
+	text-align: center;
+}
 .header h3 {
 	color: grey;
 	font-style: italic;
@@ -60,12 +69,14 @@ body {
 	margin: 20px 0px 0px 4px;
 }
 .card {
+	width: 100%;
 	background-color: white;
 	border-radius: 2px;
-	margin: 4px;
+	margin: auto;
+	margin-bottom: 4px;
 	padding: 8px; 
 }
-.btnadd {
+.btnShowModal {
 	position: absolute;
 	right: 10px;
 }
@@ -82,7 +93,7 @@ body {
 	color: white;
 }
 
-icon {
+i {
 	margin: 0px;
 }
 input {
@@ -92,13 +103,18 @@ input {
 	border: none;
 	max-width: 100%;
 	margin-bottom: 8px;
+	width: 90%;
 }
 .bordered {
-	border: 1px solid;
+	border-bottom: 2px solid;
+	border-right: 3px solid;
 }
-.hide {
+.inputType {
 	display: none;
 }
-.show {
+.inputText {
+	width: 100%;
+}
+.inputButton {
 	display: block;
 }
