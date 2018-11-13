@@ -3,23 +3,18 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Todo List in JS </title>
-	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="./index.css"/>
+
 </head>
 <body>
-	<div class="header">
-		<h3><icon class="far fa-calendar-check"></icon> To-Do list</h3>
-		<button class="btnadd btn" onclick="showModal()"><icon class="fa fa-plus-square"></icon></button>
-	</div>
-	<div class="container">
-		<div class="modal" id="modal1">
-			<div class="addlist">
-				<input type="text" id="listname" autofocus="true" placeholder="Type new list title ..." />
-				<button class="btn" onclick="createNew()">OK</button>
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript" src="index.js"></script>
+	<div id="todo1"></div>
+	<div id="todo2"></div>
+	<script type="text/javascript" src="List.js"></script>
+	<script type="text/javascript" src="App.js"></script>
+	
+
 </body>
 </html>
