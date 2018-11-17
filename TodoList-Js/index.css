@@ -1,4 +1,5 @@
 *{
+	box-sizing: border-box;
 	margin: 0px 16px 0px 0px;
 	font-family: 'Roboto', sans-serif;
 }
@@ -38,6 +39,7 @@ body {
 	position: absolute;
 	top: 0px;
 	left: 0px;
+	z-index: 999;
 	background-color: rgba(0,0,0,0.6);
 	display: none;
 	height: 100vh;
@@ -56,11 +58,26 @@ body {
 	border-radius: 5px;
 	background-color: #D5D5D5;
 	margin: 6px;
-	padding: 8px;
+	padding: 2px;
 	width: 18vw;
 }
 .listhead {
 	margin: 4px 8px;
+	display: flex;
+	position: relative;
+}
+.button {
+	font-size: 1.2em;
+	border: none;
+	background-color: inherit;
+	text-decoration: none;
+	background-color: none;
+	color: grey;
+	cursor: pointer;
+	margin: 0px;
+}
+.button:hover {
+	color: red;
 }
 .listcard {
 	padding-bottom: 20px;
@@ -71,25 +88,26 @@ body {
 }
 .card {
 	box-sizing: border-box;
-	width: 18vw;
+	display: inline-flex;
+	width: 100%;
 	height: 40px;
 	background-color: white;
 	border-radius: 5px;
 	margin: auto;
 	border: 2px solid #D5D5D5;
-	/*margin-bottom: 4px;*/
 	padding: 8px; 
 }
 .placeholder {
 	box-sizing: border-box;
 	display: none;
+	z-index: 5;
 	position: absolute;
 	height: 40px;
-	width: 18vw;
+	width: 0px;
 	margin: 0px;
 	padding: 8px;
 	border-radius: 2px;
-	border: 3px dotted white;	
+	border: 3px dashed white;	
 	background-color: #D5D5D5;
 	color: white;
 	text-align: center;
@@ -116,12 +134,13 @@ i {
 	margin: 0px;
 }
 input {
-	display: block;
 	border-radius: 2px;
 	padding: 8px;
 	border: none;
-	max-width: 100%;
 	margin-bottom: 8px;
+}
+.inputText{
+	display: block;
 	width: 90%;
 }
 .bordered {
@@ -136,4 +155,73 @@ input {
 }
 .inputButton {
 	display: block;
+}
+
+.headername{
+	font-weight: bold;
+	cursor: pointer;
+	font-size: 1em;
+	background-color: inherit;
+	width: 100%;
+}
+
+
+/* Edit holder */
+.remove {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+.filter {
+	position: absolute;
+	top: 0px;
+	right: 10px;
+}
+.delCard {
+	float: right;
+}
+.checkbox {
+	margin: 0px;
+	top: 0px;
+}
+.cardtitle {
+	width: 100%;
+	padding: 8px;
+	cursor: pointer;
+	background-color: inherit;
+}
+.listModal {
+	position: absolute;	
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+	height: 100vh;
+	width: 100vw;
+	background-color: rgba(0,0,0,0.6);
+}
+
+.dropdown {
+	display: none;
+	position: absolute;
+	width: 80px;
+	padding: 4px;
+	border-radius: 5px;
+	box-shadow: 3px 3px 10px 0px black;
+	background-color: white;
+	
+}
+.dd-item {
+	display: block;
+	width: 100%;
+	padding-left: 4px;
+	text-decoration: none;
+	border-bottom: 1px solid grey;
+	color: #223767;
+}
+.dd-item:last-of-type {
+	border: none;
+}
+.dd-item:hover {
+	color: blue;
+	background-color: #ddd;
 }

@@ -63,6 +63,7 @@ class App {
 		// set attributes for place holder
 		this.plEl.style.top = this.plElRect.top + "px"
 		this.plEl.style.left = this.plElRect.left + "px"
+		this.plEl.style.width =  this.plElRect.width + "px"
 		this.plEl.style.display = 'block'
 
 		let parent = event.currentTarget;// list bounds this target
@@ -108,5 +109,7 @@ App.template = `
 		<div class="placeholder">Drop here ...</div>
 	</div>
 `
-new App('todo1').addList('Demo');
+let app1 = new App('todo1');
+app1.addList('Demo');
+app1.addList('Demo 2');
 new App('todo2');
