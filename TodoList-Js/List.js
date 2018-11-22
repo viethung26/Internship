@@ -66,8 +66,6 @@ class List {
 				this.inputText.value = '';
 			} else if(target.closest('.remove')) {
 				this.destroy();
-			} else if(target.closest('.edit')) {
-				this.editHolder.style.visibility = 'visible';
 			} else if(target.closest('.delCard')) {
 				let parent = target.parentNode;
 				if(parent.matches('.delCard')) parent = parent.parentNode;

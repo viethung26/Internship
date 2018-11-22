@@ -59,7 +59,8 @@ body {
 	background-color: #D5D5D5;
 	margin: 6px;
 	padding: 2px;
-	width: 18vw;
+	width: 300px;
+	height: fit-content;
 }
 .listhead {
 	margin: 4px 8px;
@@ -86,6 +87,7 @@ body {
 .addcard {
 	margin: 20px 0px 0px 4px;
 }
+
 .card {
 	box-sizing: border-box;
 	display: inline-flex;
@@ -155,8 +157,14 @@ input {
 }
 .inputButton {
 	display: block;
+	width: 100%;
+	text-align: left;
 }
-
+.inputButton:hover {
+	background-color: grey;
+	border-radius: 5px;
+	
+}
 .headername{
 	font-weight: bold;
 	cursor: pointer;
@@ -183,6 +191,9 @@ input {
 .checkbox {
 	margin: 0px;
 	top: 0px;
+}
+.done {
+	text-decoration: line-through;
 }
 .cardtitle {
 	width: 100%;
